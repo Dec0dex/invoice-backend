@@ -1,11 +1,15 @@
 package net.decodex.invoice.controlers
 
+import com.querydsl.core.types.Predicate
+import net.decodex.invoice.domain.dao.UserDao
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.*
 import net.decodex.invoice.domain.dto.UserDto
 import net.decodex.invoice.domain.dto.UserRegistrationDto
+import net.decodex.invoice.domain.model.User
 import net.decodex.invoice.services.UserService
+import org.springframework.data.querydsl.binding.QuerydslPredicate
 
 @RestController
 @RequestMapping("/api/user")
@@ -22,6 +26,16 @@ class UserController {
     @GetMapping("/{id}")
     fun getUserById(@PathVariable id: Long): UserDto {
         return userService.getUserById(id)
+    }
+
+    @GetMapping("/findAll")
+    fun getUsersByPredicate(
+        @QuerydslPredicate(
+            root = User::class,
+            bindings = UserDao::class
+        ) predicate: Predicate?
+    ): List<UserDto> {
+        return userService.getUsersByPredicate(predicate)
     }
 
     @DeleteMapping("/{id}")

@@ -13,6 +13,7 @@ class UserDto() {
         updatedAt = user.updatedAt
         fullName = user.fullName
         dateOfBirth = user.dateOfBirth
+        companyId = user.company.id
     }
 
     lateinit var username: String
@@ -20,11 +21,10 @@ class UserDto() {
     lateinit var fullName: String
 
     lateinit var createdAt: Date
-
     lateinit var updatedAt: Date
 
     var dateOfBirth: Date? = null
 
     var id: Long = 0
-
+    var companyId: Long = 0
 }

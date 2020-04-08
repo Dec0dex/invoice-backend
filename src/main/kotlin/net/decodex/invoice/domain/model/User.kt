@@ -21,6 +21,10 @@ data class User(
 
     var dateOfBirth: Date? = null,
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "company_id")
+    var company: Company,
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,

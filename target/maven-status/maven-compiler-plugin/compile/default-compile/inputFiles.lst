@@ -1,0 +1,4 @@
+/home/android/IdeaProjects/invoice-backend/target/generated-sources/kapt/compile/net/decodex/invoice/domain/model/QCompany.java
+/home/android/IdeaProjects/invoice-backend/src/main/kotlin/net/decodex/invoice/domain/dao/CompanyDao.java
+/home/android/IdeaProjects/invoice-backend/target/generated-sources/kapt/compile/net/decodex/invoice/domain/model/QUser.java
+/home/android/IdeaProjects/invoice-backend/src/main/kotlin/net/decodex/invoice/domain/dao/UserDao.java
