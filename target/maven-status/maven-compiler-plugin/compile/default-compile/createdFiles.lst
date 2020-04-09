@@ -1,4 +1,5 @@
 net/decodex/invoice/domain/dao/UserDao.class
+net/decodex/invoice/domain/model/QUnitOfMeasure.class
 net/decodex/invoice/domain/dao/CompanyDao.class
 net/decodex/invoice/domain/model/QUser.class
 net/decodex/invoice/domain/model/QCompany.class

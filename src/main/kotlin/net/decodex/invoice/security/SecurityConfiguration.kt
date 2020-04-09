@@ -26,35 +26,35 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http.cors().and()
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers(
-                        "/api/docs",
-                        "/actuator/**",
-                        "/swagger-ui.html",
-                        "/configuration/ui",
-                        "/swagger-resources/**",
-                        "/configuration/**",
-                        "/swagger-ui.html",
-                        "/webjars/**",
-                        "/csrf",
-                        "/api/public/**",
-                        "/error"
-                ).permitAll()
-                .antMatchers(HttpMethod.POST, "/api/auth").permitAll()
-                .antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .addFilter(UserAuthenticationFilter(authenticationManager()))
-                .addFilter(UserAuthorizationFilter(authenticationManager()))
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .csrf().disable()
+            .authorizeRequests()
+            .antMatchers(
+                "/api/docs",
+                "/actuator/**",
+                "/swagger-ui.html",
+                "/configuration/ui",
+                "/swagger-resources/**",
+                "/configuration/**",
+                "/swagger-ui.html",
+                "/webjars/**",
+                "/csrf",
+                "/api/public/**",
+                "/error"
+            ).permitAll()
+            .antMatchers(HttpMethod.POST, "/api/auth").permitAll()
+            .antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .addFilter(UserAuthenticationFilter(authenticationManager()))
+            .addFilter(UserAuthorizationFilter(authenticationManager()))
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
     }
 
     @Throws(Exception::class)
     public override fun configure(auth: AuthenticationManagerBuilder) {
         auth.userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder())
+            .passwordEncoder(passwordEncoder())
     }
 
     @Bean

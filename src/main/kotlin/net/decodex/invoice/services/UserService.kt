@@ -3,13 +3,13 @@ package net.decodex.invoice.services
 import com.querydsl.core.types.Predicate
 import net.decodex.invoice.domain.dao.CompanyDao
 import net.decodex.invoice.domain.dao.UserDao
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.stereotype.Service
 import net.decodex.invoice.domain.dto.UserDto
 import net.decodex.invoice.domain.dto.UserRegistrationDto
 import net.decodex.invoice.domain.model.User
 import net.decodex.invoice.exceptions.ResourceNotFoundException
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.stereotype.Service
 
 @Service
 class UserService {

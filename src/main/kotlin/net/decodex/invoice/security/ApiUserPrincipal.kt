@@ -1,8 +1,8 @@
 package net.decodex.invoice.security
 
+import net.decodex.invoice.domain.model.User
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
-import net.decodex.invoice.domain.model.User
 
 class ApiUserPrincipal(private val user: User) : UserDetails {
 

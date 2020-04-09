@@ -36,7 +36,7 @@ public class UserController {
     @org.jetbrains.annotations.NotNull()
     @org.springframework.web.bind.annotation.GetMapping(value = {"/findAll"})
     public java.util.List<net.decodex.invoice.domain.dto.UserDto> getUsersByPredicate(@org.jetbrains.annotations.Nullable()
-    @org.springframework.data.querydsl.binding.QuerydslPredicate(root = org.apache.catalina.User.class, bindings = net.decodex.invoice.domain.dao.UserDao.class)
+    @org.springframework.data.querydsl.binding.QuerydslPredicate(root = net.decodex.invoice.domain.model.User.class, bindings = net.decodex.invoice.domain.dao.UserDao.class)
     com.querydsl.core.types.Predicate predicate) {
         return null;
     }

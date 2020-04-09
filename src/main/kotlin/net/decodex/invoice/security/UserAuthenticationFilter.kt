@@ -35,8 +35,8 @@ class UserAuthenticationFilter(authenticationManager: AuthenticationManager) : U
     }
 
     override fun successfulAuthentication(
-            request: HttpServletRequest, response: HttpServletResponse,
-            filterChain: FilterChain, authentication: Authentication
+        request: HttpServletRequest, response: HttpServletResponse,
+        filterChain: FilterChain, authentication: Authentication
     ) {
         val user = authentication.principal as ApiUserPrincipal
         val roles = user.authorities.map(GrantedAuthority::getAuthority)
@@ -44,13 +44,13 @@ class UserAuthenticationFilter(authenticationManager: AuthenticationManager) : U
         val signingKey = SecurityConstants.JWT_SECRET.toByteArray()
 
         val token = Jwts.builder()
-                .signWith(Keys.hmacShaKeyFor(signingKey), SignatureAlgorithm.HS512)
-                .setHeaderParam("type", SecurityConstants.TOKEN_TYPE)
-                .setIssuer(SecurityConstants.TOKEN_ISSUER)
-                .setAudience(SecurityConstants.TOKEN_AUDIENCE)
-                .setSubject(user.username)
-                .claim("roles", roles)
-                .compact()
+            .signWith(Keys.hmacShaKeyFor(signingKey), SignatureAlgorithm.HS512)
+            .setHeaderParam("type", SecurityConstants.TOKEN_TYPE)
+            .setIssuer(SecurityConstants.TOKEN_ISSUER)
+            .setAudience(SecurityConstants.TOKEN_AUDIENCE)
+            .setSubject(user.username)
+            .claim("roles", roles)
+            .compact()
 
         response.addHeader(SecurityConstants.TOKEN_HEADER, SecurityConstants.TOKEN_PREFIX + token)
         response.contentType = "application/json"
