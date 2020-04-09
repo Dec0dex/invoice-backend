@@ -6,9 +6,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.util.*
 import javax.persistence.*
 
-@Entity(name = "company_table")
+@Entity(name = "client_table")
 @EntityListeners(AuditingEntityListener::class)
-data class Company(
+data class Client(
+
     var name: String,
     var address: String,
     var postalCode: String,
@@ -17,8 +18,11 @@ data class Company(
     @Column(unique = true)
     var pib: String,
 
-    @Column(unique = true)
-    var accountNumber: String,
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "company_id")
+    var company: Company,
+
+    var accountNumber: String? = null,
 
     var phoneNumber: String? = null,
     var email: String? = null,
@@ -26,15 +30,6 @@ data class Company(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
-
-    @OneToMany(mappedBy = "company", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var employes: List<User> = arrayListOf(),
-
-    @OneToMany(mappedBy = "company", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var unitOfMeasures: List<UnitOfMeasure> = arrayListOf(),
-
-    @OneToMany(mappedBy = "company", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var clients: List<Client> = arrayListOf(),
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)

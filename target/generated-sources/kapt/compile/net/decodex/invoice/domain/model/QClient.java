@@ -11,14 +11,16 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QCompany is a Querydsl query type for Company
+ * QClient is a Querydsl query type for Client
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QCompany extends EntityPathBase<Company> {
+public class QClient extends EntityPathBase<Client> {
 
-    private static final long serialVersionUID = -1770578972L;
+    private static final long serialVersionUID = -475657340L;
 
-    public static final QCompany company = new QCompany("company");
+    private static final PathInits INITS = PathInits.DIRECT2;
+
+    public static final QClient client = new QClient("client");
 
     public final StringPath accountNumber = createString("accountNumber");
 
@@ -26,13 +28,11 @@ public class QCompany extends EntityPathBase<Company> {
 
     public final StringPath city = createString("city");
 
-    public final ListPath<Client, QClient> clients = this.<Client, QClient>createList("clients", Client.class, QClient.class, PathInits.DIRECT2);
+    public final QCompany company;
 
     public final DateTimePath<java.util.Date> createdAt = createDateTime("createdAt", java.util.Date.class);
 
     public final StringPath email = createString("email");
-
-    public final ListPath<User, QUser> employes = this.<User, QUser>createList("employes", User.class, QUser.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -44,20 +44,27 @@ public class QCompany extends EntityPathBase<Company> {
 
     public final StringPath postalCode = createString("postalCode");
 
-    public final ListPath<UnitOfMeasure, QUnitOfMeasure> unitOfMeasures = this.<UnitOfMeasure, QUnitOfMeasure>createList("unitOfMeasures", UnitOfMeasure.class, QUnitOfMeasure.class, PathInits.DIRECT2);
-
     public final DateTimePath<java.util.Date> updatedAt = createDateTime("updatedAt", java.util.Date.class);
 
-    public QCompany(String variable) {
-        super(Company.class, forVariable(variable));
+    public QClient(String variable) {
+        this(Client.class, forVariable(variable), INITS);
     }
 
-    public QCompany(Path<Company> path) {
-        super(path.getType(), path.getMetadata());
+    public QClient(Path<Client> path) {
+        this(path.getType(), path.getMetadata(), path.getMetadata().isRoot() ? INITS : PathInits.DEFAULT);
     }
 
-    public QCompany(PathMetadata metadata) {
-        super(Company.class, metadata);
+    public QClient(PathMetadata metadata) {
+        this(metadata, metadata.isRoot() ? INITS : PathInits.DEFAULT);
+    }
+
+    public QClient(PathMetadata metadata, PathInits inits) {
+        this(Client.class, metadata, inits);
+    }
+
+    public QClient(Class<? extends Client> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.company = inits.isInitialized("company") ? new QCompany(forProperty("company")) : null;
     }
 
 }
