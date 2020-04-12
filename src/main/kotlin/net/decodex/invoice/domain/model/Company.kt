@@ -28,13 +28,13 @@ data class Company(
     val id: Long = 0,
 
     @OneToMany(mappedBy = "company", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var employes: List<User> = arrayListOf(),
+    var employes: MutableList<User> = arrayListOf(),
 
     @OneToMany(mappedBy = "company", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var unitOfMeasures: List<UnitOfMeasure> = arrayListOf(),
+    var unitOfMeasures: MutableList<UnitOfMeasure> = arrayListOf(),
 
     @OneToMany(mappedBy = "company", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var clients: List<Client> = arrayListOf(),
+    var clients: MutableList<Client> = arrayListOf(),
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)

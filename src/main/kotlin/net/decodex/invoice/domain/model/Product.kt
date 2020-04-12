@@ -6,21 +6,29 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.util.*
 import javax.persistence.*
 
-@Entity(name = "unit_of_measure_table")
+@Entity(name = "product_table")
 @EntityListeners(AuditingEntityListener::class)
-data class UnitOfMeasure(
+data class Product(
+
     var name: String,
+    var pdv: Int,
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id")
     var company: Company,
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "unit_of_measure_id")
+    var unitOfMeasure: UnitOfMeasure,
+
+    var barcode: String? = null,
+
+    @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    var productPrices: MutableList<ProductPrice> = arrayListOf(),
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
-
-    @OneToMany(mappedBy = "unitOfMeasure", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var products: MutableList<Product> = arrayListOf(),
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)
