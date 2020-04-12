@@ -16,6 +16,7 @@ class InvoiceProductDto() {
         this.barcode = price.product.barcode
         this.unitOfMeasure = UnitOfMeasureDto(price.product.unitOfMeasure)
         this.companyId = price.product.company.id
+        this.priceId = price.id
     }
 
     lateinit var name: String
@@ -28,6 +29,7 @@ class InvoiceProductDto() {
 
     var id: Long = 0
     var companyId: Long = 0
+    var priceId: Long = 0
 
     var number: Int? = 0
 
