@@ -22,11 +22,15 @@ public class QProductPrice extends EntityPathBase<ProductPrice> {
 
     public static final QProductPrice productPrice = new QProductPrice("productPrice");
 
+    public final QClient client;
+
     public final DateTimePath<java.util.Date> createdAt = createDateTime("createdAt", java.util.Date.class);
 
     public final NumberPath<Integer> discount = createNumber("discount", Integer.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    public final QInvoice invoice;
 
     public final NumberPath<Double> price = createNumber("price", Double.class);
 
@@ -54,6 +58,8 @@ public class QProductPrice extends EntityPathBase<ProductPrice> {
 
     public QProductPrice(Class<? extends ProductPrice> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.client = inits.isInitialized("client") ? new QClient(forProperty("client"), inits.get("client")) : null;
+        this.invoice = inits.isInitialized("invoice") ? new QInvoice(forProperty("invoice"), inits.get("invoice")) : null;
         this.product = inits.isInitialized("product") ? new QProduct(forProperty("product"), inits.get("product")) : null;
     }
 

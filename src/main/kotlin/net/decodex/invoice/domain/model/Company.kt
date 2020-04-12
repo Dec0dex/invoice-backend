@@ -36,6 +36,9 @@ data class Company(
     @OneToMany(mappedBy = "company", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var clients: MutableList<Client> = arrayListOf(),
 
+    @OneToMany(mappedBy = "company", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    var invoices: MutableList<Invoice> = arrayListOf(),
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreatedDate

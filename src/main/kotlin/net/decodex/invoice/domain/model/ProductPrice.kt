@@ -16,9 +16,19 @@ data class ProductPrice(
 
     var price: Double,
 
-    var discount: Int = 0,
+    var discount: Int? = 0,
 
-    var quantity: Int = 0,
+    var quantity: Int? = 0,
+
+    var number: Int? = 0,
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "invoice_id")
+    var invoice: Invoice? = null,
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "client_id")
+    var client: Client? = null,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

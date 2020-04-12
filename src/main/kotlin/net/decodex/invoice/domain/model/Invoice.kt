@@ -6,36 +6,39 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.util.*
 import javax.persistence.*
 
-@Entity(name = "client_table")
+@Entity(name = "invoice_table")
 @EntityListeners(AuditingEntityListener::class)
-data class Client(
+data class Invoice(
+    var number: Int,
 
     var name: String,
-    var address: String,
-    var postalCode: String,
-    var city: String,
 
-    @Column(unique = true)
-    var pib: String,
+    var dateCreated: Date,
+
+    var dateOfTraffic: Date,
+
+    var paymentDue: Date,
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id")
     var company: Company,
 
-    var accountNumber: String? = null,
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "client_id")
+    var client: Client,
 
-    var phoneNumber: String? = null,
-    var email: String? = null,
+    @OneToMany(mappedBy = "invoice", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    var productPrices: MutableList<ProductPrice> = arrayListOf(),
+
+    var sum: Double = 0.0,
+
+    var payedAmount: Double = 0.0,
+
+    var remainingAmount: Double = 0.0,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
-
-    @OneToMany(mappedBy = "client", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var invoices: MutableList<Invoice> = arrayListOf(),
-
-    @OneToMany(mappedBy = "client", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var productPrices: MutableList<ProductPrice> = arrayListOf(),
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)

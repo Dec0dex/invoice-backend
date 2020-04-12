@@ -3,8 +3,10 @@ net/decodex/invoice/domain/model/QUser.class
 net/decodex/invoice/domain/model/QProductPrice.class
 net/decodex/invoice/domain/model/QCompany.class
 net/decodex/invoice/domain/dao/ProductPriceDao.class
+net/decodex/invoice/domain/dao/InvoiceDao.class
 net/decodex/invoice/domain/dao/UserDao.class
 net/decodex/invoice/domain/model/QClient.class
 net/decodex/invoice/domain/model/QProduct.class
 net/decodex/invoice/domain/dao/CompanyDao.class
+net/decodex/invoice/domain/model/QInvoice.class
 net/decodex/invoice/domain/dao/ProductDao.class

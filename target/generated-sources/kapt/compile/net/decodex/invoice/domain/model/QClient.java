@@ -36,6 +36,8 @@ public class QClient extends EntityPathBase<Client> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final ListPath<Invoice, QInvoice> invoices = this.<Invoice, QInvoice>createList("invoices", Invoice.class, QInvoice.class, PathInits.DIRECT2);
+
     public final StringPath name = createString("name");
 
     public final StringPath phoneNumber = createString("phoneNumber");
@@ -43,6 +45,8 @@ public class QClient extends EntityPathBase<Client> {
     public final StringPath pib = createString("pib");
 
     public final StringPath postalCode = createString("postalCode");
+
+    public final ListPath<ProductPrice, QProductPrice> productPrices = this.<ProductPrice, QProductPrice>createList("productPrices", ProductPrice.class, QProductPrice.class, PathInits.DIRECT2);
 
     public final DateTimePath<java.util.Date> updatedAt = createDateTime("updatedAt", java.util.Date.class);
 

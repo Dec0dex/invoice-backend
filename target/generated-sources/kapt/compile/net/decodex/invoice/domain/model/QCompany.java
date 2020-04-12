@@ -36,6 +36,8 @@ public class QCompany extends EntityPathBase<Company> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final ListPath<Invoice, QInvoice> invoices = this.<Invoice, QInvoice>createList("invoices", Invoice.class, QInvoice.class, PathInits.DIRECT2);
+
     public final StringPath name = createString("name");
 
     public final StringPath phoneNumber = createString("phoneNumber");
