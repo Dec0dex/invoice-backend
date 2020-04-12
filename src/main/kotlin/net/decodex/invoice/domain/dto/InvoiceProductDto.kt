@@ -8,6 +8,7 @@ class InvoiceProductDto() {
     constructor(price: ProductPrice) : this() {
         this.name = price.product.name
         this.id = price.product.id
+        this.number = price.number
         this.pdv = price.product.pdv
         this.price = price.price
         this.discount = price.discount
@@ -27,6 +28,8 @@ class InvoiceProductDto() {
 
     var id: Long = 0
     var companyId: Long = 0
+
+    var number: Int? = 0
 
     var createdAt: Date? = null
     var updatedAt: Date? = null
