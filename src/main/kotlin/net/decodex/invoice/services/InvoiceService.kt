@@ -1,13 +1,14 @@
 package net.decodex.invoice.services
 
 import com.querydsl.core.types.Predicate
-import net.decodex.invoice.domain.dao.ClientDao
-import net.decodex.invoice.domain.dao.CompanyDao
-import net.decodex.invoice.domain.dao.InvoiceDao
+import net.decodex.invoice.domain.dao.*
 import net.decodex.invoice.domain.dto.CreateInvoiceDto
+import net.decodex.invoice.domain.dto.CreateInvoiceProductDto
 import net.decodex.invoice.domain.dto.InvoiceDto
 import net.decodex.invoice.domain.dto.InvoiceProductDto
 import net.decodex.invoice.domain.model.Invoice
+import net.decodex.invoice.domain.model.Product
+import net.decodex.invoice.domain.model.ProductPrice
 import net.decodex.invoice.exceptions.ResourceNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -27,6 +28,12 @@ class InvoiceService {
 
     @Autowired
     lateinit var clientRepository: ClientDao
+
+    @Autowired
+    lateinit var productPriceRepository: ProductPriceDao
+
+    @Autowired
+    lateinit var productRepository: ProductDao
 
     fun getInvoiceById(id: Long): InvoiceDto {
         val invoice = invoiceRepository.findById(id)
@@ -111,6 +118,102 @@ class InvoiceService {
         invoice.get().paymentDue = createDto.paymentDue
 
         return InvoiceDto(invoiceRepository.save(invoice.get()))
+    }
+
+    fun deleteInvoiceProduct(id: Long, priceId: Long) {
+        var invoice = invoiceRepository.findById(id)
+        if(!invoice.isPresent) {
+            throw ResourceNotFoundException()
+        }
+
+        val price = productPriceRepository.findById(priceId)
+        if(!price.isPresent) {
+            throw ResourceNotFoundException()
+        }
+
+        if (invoice.get().productPrices.contains(price.get())) {
+            productPriceRepository.delete(price.get())
+            invoice = invoiceRepository.findById(id)
+            var number = 1
+            invoice.get().productPrices.forEach {
+                it.number = number
+                productPriceRepository.save(it)
+                number += 1
+            }
+        }
+    }
+
+    fun createInvoiceProduct(id: Long, dto: CreateInvoiceProductDto): InvoiceProductDto {
+        val invoice = invoiceRepository.findById(id)
+        if(!invoice.isPresent) {
+            throw ResourceNotFoundException()
+        }
+        val product = productRepository.findById(dto.productId)
+        if(!product.isPresent) {
+            throw ResourceNotFoundException()
+        }
+
+        val number = if (invoice.get().productPrices.isEmpty()) {
+            1
+        } else {
+            invoice.get().productPrices.last().number!! + 1
+        }
+
+        val productPrice = ProductPrice(
+            product.get(),
+            dto.price,
+            dto.discount,
+            dto.quantity,
+            number,
+            invoice.get(),
+            invoice.get().client
+        )
+
+        val productValue = calculateProductSum(productPrice, product.get())
+        invoice.get().sum += productValue
+        invoice.get().remainingAmount += productValue
+        invoiceRepository.save(invoice.get())
+
+        return InvoiceProductDto(productPriceRepository.save(productPrice))
+    }
+
+    fun updateInvoiceProduct(id: Long, dto: CreateInvoiceProductDto): InvoiceProductDto {
+        val invoice = invoiceRepository.findById(id)
+        if(!invoice.isPresent) {
+            throw ResourceNotFoundException()
+        }
+        val product = productRepository.findById(dto.productId)
+        if(!product.isPresent) {
+            throw ResourceNotFoundException()
+        }
+        val productPrice = productPriceRepository.findById(dto.id)
+        if(!productPrice.isPresent) {
+            throw ResourceNotFoundException()
+        }
+
+        val preChangePrice = calculateProductSum(productPrice.get(), product.get())
+
+        productPrice.get().price = dto.price
+        productPrice.get().discount = dto.discount
+        productPrice.get().quantity = dto.quantity
+        productPrice.get().product = product.get()
+
+        val postChangePrice = calculateProductSum(productPrice.get(), product.get())
+        invoice.get().sum -= preChangePrice
+        invoice.get().sum += postChangePrice
+        invoice.get().remainingAmount -= preChangePrice
+        invoice.get().remainingAmount += postChangePrice
+        invoiceRepository.save(invoice.get())
+
+        return InvoiceProductDto(productPriceRepository.save(productPrice.get()))
+    }
+
+    private fun calculateProductSum(price: ProductPrice, product: Product): Double {
+        var basePrice = price.price * price.quantity!!
+        val discount = basePrice * (price.discount ?: 0 / 100)
+        basePrice -= discount
+        val taxRate = basePrice * (product.pdv / 100)
+        return basePrice + taxRate
     }
 
     private fun getFirstDayOfYear(): Date {

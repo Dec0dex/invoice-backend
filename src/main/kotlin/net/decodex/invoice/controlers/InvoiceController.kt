@@ -3,6 +3,7 @@ package net.decodex.invoice.controlers
 import com.querydsl.core.types.Predicate
 import net.decodex.invoice.domain.dao.InvoiceDao
 import net.decodex.invoice.domain.dto.CreateInvoiceDto
+import net.decodex.invoice.domain.dto.CreateInvoiceProductDto
 import net.decodex.invoice.domain.dto.InvoiceDto
 import net.decodex.invoice.domain.dto.InvoiceProductDto
 import net.decodex.invoice.domain.model.Invoice
@@ -23,9 +24,24 @@ class InvoiceController {
         return invoiceService.getInvoiceById(id)
     }
 
-    @GetMapping("/{id}/products")
+    @GetMapping("/{id}/product")
     fun getInvoiceProducts(@PathVariable id: Long): List<InvoiceProductDto> {
         return invoiceService.getInvoiceProducts(id)
+    }
+
+    @PostMapping("/{id}/product")
+    fun createInvoiceProduct(@PathVariable id: Long, @RequestBody dto: CreateInvoiceProductDto): InvoiceProductDto {
+        return invoiceService.createInvoiceProduct(id, dto)
+    }
+
+    @PutMapping("/{id}/product")
+    fun updateInvoiceProduct(@PathVariable id: Long, @RequestBody dto: CreateInvoiceProductDto): InvoiceProductDto {
+        return invoiceService.updateInvoiceProduct(id, dto)
+    }
+
+    @DeleteMapping("/{id}/product/{productId}")
+    fun deleteInvoiceProduct(@PathVariable id: Long, @PathVariable priceId: Long) {
+        return invoiceService.deleteInvoiceProduct(id, priceId)
     }
 
     @GetMapping("/findAll")
