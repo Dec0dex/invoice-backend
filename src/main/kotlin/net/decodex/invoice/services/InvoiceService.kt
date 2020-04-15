@@ -131,8 +131,12 @@ class InvoiceService {
             throw ResourceNotFoundException()
         }
 
+        val sumToMinus = calculateProductSum(price.get(), price.get().product)
+
         if (invoice.get().productPrices.contains(price.get())) {
             invoice.get().productPrices.remove(price.get())
+            invoice.get().sum -= sumToMinus
+            invoice.get().remainingAmount -= sumToMinus
             invoiceRepository.save(invoice.get())
             productPriceRepository.delete(price.get())
             val tmpInvoice = invoiceRepository.findById(id)
