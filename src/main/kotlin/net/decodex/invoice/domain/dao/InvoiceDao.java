@@ -1,6 +1,7 @@
 package net.decodex.invoice.domain.dao;
 
 import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.core.types.dsl.StringExpression;
 import com.querydsl.core.types.dsl.StringPath;
 import net.decodex.invoice.domain.model.Invoice;
@@ -27,6 +28,7 @@ public interface InvoiceDao extends JpaRepository<Invoice, Long>, QuerydslPredic
 
     @Override
     default void customize(QuerydslBindings bindings, @NotNull QInvoice root) {
+        bindings.bind(root.remainingAmount).first(NumberExpression::gt);
         bindings.bind(String.class)
                 .first((SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase);
     }
