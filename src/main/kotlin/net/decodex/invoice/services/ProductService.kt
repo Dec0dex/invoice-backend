@@ -1,10 +1,7 @@
 package net.decodex.invoice.services
 
 import com.querydsl.core.types.Predicate
-import net.decodex.invoice.domain.dao.CompanyDao
-import net.decodex.invoice.domain.dao.ProductDao
-import net.decodex.invoice.domain.dao.ProductPriceDao
-import net.decodex.invoice.domain.dao.UnitOfMeasureDao
+import net.decodex.invoice.domain.dao.*
 import net.decodex.invoice.domain.dto.ProductDto
 import net.decodex.invoice.domain.model.Product
 import net.decodex.invoice.domain.model.ProductPrice
@@ -26,6 +23,9 @@ class ProductService {
 
     @Autowired
     private lateinit var productPriceRepository: ProductPriceDao
+
+    @Autowired
+    private lateinit var clientRepository: ClientDao
 
     fun getProductById(id: Long): ProductDto {
         val product = productRepository.findById(id)
@@ -84,10 +84,29 @@ class ProductService {
         product.get().unitOfMeasure = unitOfMeasure.get()
 
         productRepository.save(product.get())
-        val price = product.get().productPrices.first()
+        val price = product.get().productPrices.minBy { it.id }!!
         price.price = dto.price
         productPriceRepository.save(price)
 
         return ProductDto(productRepository.findById(id).get())
+    }
+
+    fun getProductPriceForClient(productId: Long, clientId: Long): Double {
+        val client = clientRepository.findById(clientId)
+        if (!client.isPresent) {
+            throw ResourceNotFoundException()
+        }
+
+        val product = productRepository.findById(productId)
+        if (!product.isPresent) {
+            throw ResourceNotFoundException()
+        }
+
+        val productList = client.get().productPrices.filter { it.product.id == productId }
+        return if (productList.isEmpty()) {
+            product.get().productPrices.minBy { it.id }!!.price
+        } else {
+            productList.maxBy { it.id }!!.price
+        }
     }
 }

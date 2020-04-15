@@ -46,4 +46,8 @@ class ProductController {
         return productService.updateProduct(productDto, productDto.id)
     }
 
+    @GetMapping("/{id}/price/{clientId}")
+    fun getProductPriceForClient(@PathVariable id: Long, @PathVariable clientId: Long): Double {
+        return productService.getProductPriceForClient(id, clientId)
+    }
 }

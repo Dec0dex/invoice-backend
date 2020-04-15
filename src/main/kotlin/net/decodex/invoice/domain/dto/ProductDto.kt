@@ -9,7 +9,7 @@ class ProductDto() {
         this.name = product.name
         this.id = product.id
         this.pdv = product.pdv
-        this.price = product.productPrices.first().price
+        this.price = product.productPrices.minBy { it.id }!!.price
         this.barcode = product.barcode
         this.unitOfMeasure = UnitOfMeasureDto(product.unitOfMeasure)
         this.companyId = product.company.id

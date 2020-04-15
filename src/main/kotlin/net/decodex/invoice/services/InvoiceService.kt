@@ -60,7 +60,7 @@ class InvoiceService {
             throw ResourceNotFoundException()
         }
 
-        return invoice.get().productPrices.map { InvoiceProductDto(it) }
+        return invoice.get().productPrices.map { InvoiceProductDto(it) }.sortedBy { it.number }
     }
 
     fun createInvoice(createDto: CreateInvoiceDto): InvoiceDto {
