@@ -7,6 +7,7 @@ import net.decodex.invoice.domain.model.Product
 import net.decodex.invoice.domain.model.ProductPrice
 import net.decodex.invoice.exceptions.ResourceNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 
 @Service
@@ -38,7 +39,7 @@ class ProductService {
     }
 
     fun getProducts(predicate: Predicate?): List<ProductDto> {
-        return productRepository.findAll(predicate).map { ProductDto(it) }
+        return productRepository.findAll(predicate, Sort.by("id")).map { ProductDto(it) }
     }
 
     fun deleteProductById(id: Long) {

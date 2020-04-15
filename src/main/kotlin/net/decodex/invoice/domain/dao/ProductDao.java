@@ -7,6 +7,7 @@ import net.decodex.invoice.domain.model.Product;
 import net.decodex.invoice.domain.model.QProduct;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
@@ -18,7 +19,7 @@ import java.util.List;
 public interface ProductDao extends JpaRepository<Product, Long>, QuerydslPredicateExecutor<Product>, QuerydslBinderCustomizer<QProduct> {
 
     @NotNull
-    List<Product> findAll(@Nullable Predicate predicate);
+    List<Product> findAll(@Nullable Predicate predicate, Sort sort);
 
     @Override
     default void customize(QuerydslBindings bindings, @NotNull QProduct root) {

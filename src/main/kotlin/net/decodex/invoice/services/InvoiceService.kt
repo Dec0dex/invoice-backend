@@ -11,6 +11,7 @@ import net.decodex.invoice.domain.model.Product
 import net.decodex.invoice.domain.model.ProductPrice
 import net.decodex.invoice.exceptions.ResourceNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -46,7 +47,7 @@ class InvoiceService {
     }
 
     fun getInvoices(predicate: Predicate?): List<InvoiceDto> {
-        return invoiceRepository.findAll(predicate).map { InvoiceDto(it) }
+        return invoiceRepository.findAll(predicate, Sort.by("id")).map { InvoiceDto(it) }
     }
 
     fun deleteInvoiceById(id: Long) {

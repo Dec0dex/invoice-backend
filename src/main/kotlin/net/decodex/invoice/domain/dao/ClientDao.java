@@ -7,6 +7,7 @@ import net.decodex.invoice.domain.model.Client;
 import net.decodex.invoice.domain.model.QClient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
@@ -18,7 +19,7 @@ import java.util.List;
 public interface ClientDao extends JpaRepository<Client, Long>, QuerydslPredicateExecutor<Client>, QuerydslBinderCustomizer<QClient> {
 
     @NotNull
-    List<Client> findAll(@Nullable Predicate predicate);
+    List<Client> findAll(@Nullable Predicate predicate, Sort sort);
 
     @Override
     default void customize(QuerydslBindings bindings, @NotNull QClient root) {

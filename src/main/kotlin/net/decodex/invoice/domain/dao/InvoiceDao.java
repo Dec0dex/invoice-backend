@@ -7,6 +7,7 @@ import net.decodex.invoice.domain.model.Invoice;
 import net.decodex.invoice.domain.model.QInvoice;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
@@ -19,7 +20,7 @@ import java.util.List;
 public interface InvoiceDao extends JpaRepository<Invoice, Long>, QuerydslPredicateExecutor<Invoice>, QuerydslBinderCustomizer<QInvoice> {
 
     @NotNull
-    List<Invoice> findAll(@Nullable Predicate predicate);
+    List<Invoice> findAll(@Nullable Predicate predicate, Sort sort);
 
     @NotNull
     List<Invoice> findAllByCreatedAtAfter(Date date);

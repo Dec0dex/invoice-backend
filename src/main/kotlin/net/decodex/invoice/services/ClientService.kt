@@ -7,6 +7,7 @@ import net.decodex.invoice.domain.dto.ClientDto
 import net.decodex.invoice.domain.model.Client
 import net.decodex.invoice.exceptions.ResourceNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 
 @Service
@@ -28,7 +29,7 @@ class ClientService {
     }
 
     fun getClients(predicate: Predicate?): List<ClientDto> {
-        return clientRepository.findAll(predicate).map { ClientDto(it) }
+        return clientRepository.findAll(predicate, Sort.by("id")).map { ClientDto(it) }
     }
 
     fun deleteClientById(id: Long) {
