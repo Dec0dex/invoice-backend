@@ -39,7 +39,7 @@ class InvoiceController {
         return invoiceService.updateInvoiceProduct(id, dto)
     }
 
-    @DeleteMapping("/{id}/product/{productId}")
+    @DeleteMapping("/{id}/product/{priceId}")
     fun deleteInvoiceProduct(@PathVariable id: Long, @PathVariable priceId: Long) {
         return invoiceService.deleteInvoiceProduct(id, priceId)
     }

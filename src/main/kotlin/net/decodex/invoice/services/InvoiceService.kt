@@ -132,10 +132,12 @@ class InvoiceService {
         }
 
         if (invoice.get().productPrices.contains(price.get())) {
+            invoice.get().productPrices.remove(price.get())
+            invoiceRepository.save(invoice.get())
             productPriceRepository.delete(price.get())
-            invoice = invoiceRepository.findById(id)
+            val tmpInvoice = invoiceRepository.findById(id)
             var number = 1
-            invoice.get().productPrices.forEach {
+            tmpInvoice.get().productPrices.sortedBy { it.id }.forEach {
                 it.number = number
                 productPriceRepository.save(it)
                 number += 1
@@ -210,9 +212,10 @@ class InvoiceService {
 
     private fun calculateProductSum(price: ProductPrice, product: Product): Double {
         var basePrice = price.price * price.quantity!!
-        val discount = basePrice * (price.discount ?: 0 / 100)
+        val discountRate = price.discount?: 0
+        val discount = basePrice * (discountRate / 100.0)
         basePrice -= discount
-        val taxRate = basePrice * (product.pdv / 100)
+        val taxRate = basePrice * (product.pdv / 100.0)
         return basePrice + taxRate
     }
 
