@@ -24,6 +24,11 @@ class InvoiceController {
         return invoiceService.getInvoiceById(id)
     }
 
+    @PostMapping("/{id}")
+    fun makePayment(@PathVariable id: Long, @RequestBody value: Double) {
+        return invoiceService.makePayment(id, value)
+    }
+
     @GetMapping("/{id}/product")
     fun getInvoiceProducts(@PathVariable id: Long): List<InvoiceProductDto> {
         return invoiceService.getInvoiceProducts(id)

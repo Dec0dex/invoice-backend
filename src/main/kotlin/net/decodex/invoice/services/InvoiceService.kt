@@ -46,6 +46,19 @@ class InvoiceService {
         return InvoiceDto(invoice.get())
     }
 
+    fun makePayment(id: Long, value: Double) {
+        val invoice = invoiceRepository.findById(id)
+
+        if (!invoice.isPresent) {
+            throw ResourceNotFoundException()
+        }
+
+        invoice.get().payedAmount += value
+        invoice.get().remainingAmount = invoice.get().sum - invoice.get().payedAmount
+        invoiceRepository.save(invoice.get())
+    }
+
+
     fun getInvoices(predicate: Predicate?): List<InvoiceDto> {
         return invoiceRepository.findAll(predicate, Sort.by("id")).map { InvoiceDto(it) }
     }
