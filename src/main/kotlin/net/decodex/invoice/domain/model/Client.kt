@@ -15,7 +15,6 @@ data class Client(
     var postalCode: String,
     var city: String,
 
-    @Column(unique = true)
     var pib: String,
 
     @ManyToOne(fetch = FetchType.EAGER)
