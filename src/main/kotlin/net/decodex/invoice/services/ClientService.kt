@@ -49,6 +49,7 @@ class ClientService {
             clientDto.postalCode,
             clientDto.city,
             clientDto.pib,
+            clientDto.registrationNumber,
             company.get(),
             clientDto.accountNumber,
             clientDto.phoneNumber,
@@ -74,6 +75,7 @@ class ClientService {
         client.get().postalCode = clientDto.postalCode
         client.get().city = clientDto.city
         client.get().pib = clientDto.pib
+        client.get().registrationNumber = clientDto.registrationNumber
         client.get().accountNumber = clientDto.accountNumber
         client.get().phoneNumber = clientDto.phoneNumber
         client.get().email = clientDto.email

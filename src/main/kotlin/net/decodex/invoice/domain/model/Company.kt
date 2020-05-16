@@ -18,6 +18,9 @@ data class Company(
     var pib: String,
 
     @Column(unique = true)
+    var registrationNumber: String,
+
+    @Column(unique = true)
     var accountNumber: String,
 
     var phoneNumber: String? = null,

@@ -16,6 +16,7 @@ data class Client(
     var city: String,
 
     var pib: String,
+    var registrationNumber: String,
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id")

@@ -11,6 +11,7 @@ class ClientDto() {
         postalCode = client.postalCode
         city = client.city
         pib = client.pib
+        registrationNumber = client.registrationNumber
         accountNumber = client.accountNumber
         phoneNumber = client.phoneNumber
         email = client.email
@@ -25,6 +26,7 @@ class ClientDto() {
     lateinit var postalCode: String
     lateinit var city: String
     lateinit var pib: String
+    lateinit var registrationNumber: String
 
     var accountNumber: String? = null
     var phoneNumber: String? = null

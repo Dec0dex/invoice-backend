@@ -39,6 +39,7 @@ class CompanyService {
             companyDto.postalCode,
             companyDto.city,
             companyDto.pib,
+            companyDto.registrationNumber,
             companyDto.accountNumber,
             companyDto.phoneNumber,
             companyDto.email
@@ -58,6 +59,7 @@ class CompanyService {
         company.get().postalCode = companyDto.postalCode
         company.get().city = companyDto.city
         company.get().pib = companyDto.pib
+        company.get().registrationNumber = companyDto.registrationNumber
         company.get().accountNumber = companyDto.accountNumber
         company.get().phoneNumber = companyDto.phoneNumber
         company.get().email = companyDto.email
