@@ -4,6 +4,7 @@ import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.core.types.dsl.StringExpression;
 import com.querydsl.core.types.dsl.StringPath;
+import net.decodex.invoice.domain.model.Company;
 import net.decodex.invoice.domain.model.Invoice;
 import net.decodex.invoice.domain.model.QInvoice;
 import org.jetbrains.annotations.NotNull;
@@ -24,7 +25,7 @@ public interface InvoiceDao extends JpaRepository<Invoice, Long>, QuerydslPredic
     List<Invoice> findAll(@Nullable Predicate predicate, Sort sort);
 
     @NotNull
-    List<Invoice> findAllByCreatedAtAfter(Date date);
+    List<Invoice> findAllByCreatedAtAfterAndCompany(Date date, Company company);
 
     @Override
     default void customize(QuerydslBindings bindings, @NotNull QInvoice root) {

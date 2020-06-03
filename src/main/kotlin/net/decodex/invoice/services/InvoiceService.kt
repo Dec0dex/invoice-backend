@@ -78,16 +78,16 @@ class InvoiceService {
     }
 
     fun createInvoice(createDto: CreateInvoiceDto): InvoiceDto {
-        val lastNumber = invoiceRepository.findAllByCreatedAtAfter(getFirstDayOfYear())
+        val company = companyRepository.findById(createDto.companyId)
+        if (!company.isPresent) {
+            throw ResourceNotFoundException()
+        }
+
+        val lastNumber = invoiceRepository.findAllByCreatedAtAfterAndCompany(getFirstDayOfYear(), company.get())
         val number = if (lastNumber.isEmpty()) {
             1
         } else {
             lastNumber.last().number + 1
-        }
-
-        val company = companyRepository.findById(createDto.companyId)
-        if (!company.isPresent) {
-            throw ResourceNotFoundException()
         }
 
         val client = clientRepository.findById(createDto.clientId)
