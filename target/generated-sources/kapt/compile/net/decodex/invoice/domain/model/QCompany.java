@@ -46,6 +46,8 @@ public class QCompany extends EntityPathBase<Company> {
 
     public final StringPath postalCode = createString("postalCode");
 
+    public final StringPath registrationNumber = createString("registrationNumber");
+
     public final ListPath<UnitOfMeasure, QUnitOfMeasure> unitOfMeasures = this.<UnitOfMeasure, QUnitOfMeasure>createList("unitOfMeasures", UnitOfMeasure.class, QUnitOfMeasure.class, PathInits.DIRECT2);
 
     public final DateTimePath<java.util.Date> updatedAt = createDateTime("updatedAt", java.util.Date.class);

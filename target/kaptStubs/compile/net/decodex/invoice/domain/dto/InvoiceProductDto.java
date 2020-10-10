@@ -1,0 +1,144 @@
+package net.decodex.invoice.domain.dto;
+
+import java.lang.System;
+
+@kotlin.Metadata(mv = {1, 1, 16}, bv = {1, 0, 3}, k = 1, d1 = {"\u0000B\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0003\n\u0002\u0010\u000e\n\u0002\b\u0005\n\u0002\u0010\t\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0010\b\n\u0002\b\u0013\n\u0002\u0010\u0006\n\u0002\b\u000b\n\u0002\u0018\u0002\n\u0002\b\b\u0018\u00002\u00020\u0001B\u000f\b\u0016\u0012\u0006\u0010\u0002\u001a\u00020\u0003\u00a2\u0006\u0002\u0010\u0004B\u0005\u00a2\u0006\u0002\u0010\u0005R\u001c\u0010\u0006\u001a\u0004\u0018\u00010\u0007X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\b\u0010\t\"\u0004\b\n\u0010\u000bR\u001a\u0010\f\u001a\u00020\rX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u000e\u0010\u000f\"\u0004\b\u0010\u0010\u0011R\u001c\u0010\u0012\u001a\u0004\u0018\u00010\u0013X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0014\u0010\u0015\"\u0004\b\u0016\u0010\u0017R\u001e\u0010\u0018\u001a\u0004\u0018\u00010\u0019X\u0086\u000e\u00a2\u0006\u0010\n\u0002\u0010\u001e\u001a\u0004\b\u001a\u0010\u001b\"\u0004\b\u001c\u0010\u001dR\u001a\u0010\u001f\u001a\u00020\rX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b \u0010\u000f\"\u0004\b!\u0010\u0011R\u001a\u0010\"\u001a\u00020\u0007X\u0086.\u00a2\u0006\u000e\n\u0000\u001a\u0004\b#\u0010\t\"\u0004\b$\u0010\u000bR\u001e\u0010%\u001a\u0004\u0018\u00010\u0019X\u0086\u000e\u00a2\u0006\u0010\n\u0002\u0010\u001e\u001a\u0004\b&\u0010\u001b\"\u0004\b\'\u0010\u001dR\u001a\u0010(\u001a\u00020\u0019X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b)\u0010*\"\u0004\b+\u0010,R\u001a\u0010\u0002\u001a\u00020-X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b.\u0010/\"\u0004\b0\u00101R\u001a\u00102\u001a\u00020\rX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b3\u0010\u000f\"\u0004\b4\u0010\u0011R\u001e\u00105\u001a\u0004\u0018\u00010\u0019X\u0086\u000e\u00a2\u0006\u0010\n\u0002\u0010\u001e\u001a\u0004\b6\u0010\u001b\"\u0004\b7\u0010\u001dR\u001a\u00108\u001a\u000209X\u0086.\u00a2\u0006\u000e\n\u0000\u001a\u0004\b:\u0010;\"\u0004\b<\u0010=R\u001c\u0010>\u001a\u0004\u0018\u00010\u0013X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b?\u0010\u0015\"\u0004\b@\u0010\u0017\u00a8\u0006A"}, d2 = {"Lnet/decodex/invoice/domain/dto/InvoiceProductDto;", "", "price", "Lnet/decodex/invoice/domain/model/ProductPrice;", "(Lnet/decodex/invoice/domain/model/ProductPrice;)V", "()V", "barcode", "", "getBarcode", "()Ljava/lang/String;", "setBarcode", "(Ljava/lang/String;)V", "companyId", "", "getCompanyId", "()J", "setCompanyId", "(J)V", "createdAt", "Ljava/util/Date;", "getCreatedAt", "()Ljava/util/Date;", "setCreatedAt", "(Ljava/util/Date;)V", "discount", "", "getDiscount", "()Ljava/lang/Integer;", "setDiscount", "(Ljava/lang/Integer;)V", "Ljava/lang/Integer;", "id", "getId", "setId", "name", "getName", "setName", "number", "getNumber", "setNumber", "pdv", "getPdv", "()I", "setPdv", "(I)V", "", "getPrice", "()D", "setPrice", "(D)V", "priceId", "getPriceId", "setPriceId", "quantity", "getQuantity", "setQuantity", "unitOfMeasure", "Lnet/decodex/invoice/domain/dto/UnitOfMeasureDto;", "getUnitOfMeasure", "()Lnet/decodex/invoice/domain/dto/UnitOfMeasureDto;", "setUnitOfMeasure", "(Lnet/decodex/invoice/domain/dto/UnitOfMeasureDto;)V", "updatedAt", "getUpdatedAt", "setUpdatedAt", "invoice-backend"})
+public final class InvoiceProductDto {
+    @org.jetbrains.annotations.NotNull()
+    public java.lang.String name;
+    @org.jetbrains.annotations.NotNull()
+    public net.decodex.invoice.domain.dto.UnitOfMeasureDto unitOfMeasure;
+    private double price = 0.0;
+    private int pdv = 0;
+    @org.jetbrains.annotations.Nullable()
+    private java.lang.Integer discount = 0;
+    @org.jetbrains.annotations.Nullable()
+    private java.lang.Integer quantity = 0;
+    @org.jetbrains.annotations.Nullable()
+    private java.lang.String barcode;
+    private long id = 0L;
+    private long companyId = 0L;
+    private long priceId = 0L;
+    @org.jetbrains.annotations.Nullable()
+    private java.lang.Integer number = 0;
+    @org.jetbrains.annotations.Nullable()
+    private java.util.Date createdAt;
+    @org.jetbrains.annotations.Nullable()
+    private java.util.Date updatedAt;
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.lang.String getName() {
+        return null;
+    }
+    
+    public final void setName(@org.jetbrains.annotations.NotNull()
+    java.lang.String p0) {
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final net.decodex.invoice.domain.dto.UnitOfMeasureDto getUnitOfMeasure() {
+        return null;
+    }
+    
+    public final void setUnitOfMeasure(@org.jetbrains.annotations.NotNull()
+    net.decodex.invoice.domain.dto.UnitOfMeasureDto p0) {
+    }
+    
+    public final double getPrice() {
+        return 0.0;
+    }
+    
+    public final void setPrice(double p0) {
+    }
+    
+    public final int getPdv() {
+        return 0;
+    }
+    
+    public final void setPdv(int p0) {
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Integer getDiscount() {
+        return null;
+    }
+    
+    public final void setDiscount(@org.jetbrains.annotations.Nullable()
+    java.lang.Integer p0) {
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Integer getQuantity() {
+        return null;
+    }
+    
+    public final void setQuantity(@org.jetbrains.annotations.Nullable()
+    java.lang.Integer p0) {
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getBarcode() {
+        return null;
+    }
+    
+    public final void setBarcode(@org.jetbrains.annotations.Nullable()
+    java.lang.String p0) {
+    }
+    
+    public final long getId() {
+        return 0L;
+    }
+    
+    public final void setId(long p0) {
+    }
+    
+    public final long getCompanyId() {
+        return 0L;
+    }
+    
+    public final void setCompanyId(long p0) {
+    }
+    
+    public final long getPriceId() {
+        return 0L;
+    }
+    
+    public final void setPriceId(long p0) {
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Integer getNumber() {
+        return null;
+    }
+    
+    public final void setNumber(@org.jetbrains.annotations.Nullable()
+    java.lang.Integer p0) {
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.util.Date getCreatedAt() {
+        return null;
+    }
+    
+    public final void setCreatedAt(@org.jetbrains.annotations.Nullable()
+    java.util.Date p0) {
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.util.Date getUpdatedAt() {
+        return null;
+    }
+    
+    public final void setUpdatedAt(@org.jetbrains.annotations.Nullable()
+    java.util.Date p0) {
+    }
+    
+    public InvoiceProductDto() {
+        super();
+    }
+    
+    public InvoiceProductDto(@org.jetbrains.annotations.NotNull()
+    net.decodex.invoice.domain.model.ProductPrice price) {
+        super();
+    }
+}

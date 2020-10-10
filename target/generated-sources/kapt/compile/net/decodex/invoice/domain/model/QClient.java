@@ -48,6 +48,8 @@ public class QClient extends EntityPathBase<Client> {
 
     public final ListPath<ProductPrice, QProductPrice> productPrices = this.<ProductPrice, QProductPrice>createList("productPrices", ProductPrice.class, QProductPrice.class, PathInits.DIRECT2);
 
+    public final StringPath registrationNumber = createString("registrationNumber");
+
     public final DateTimePath<java.util.Date> updatedAt = createDateTime("updatedAt", java.util.Date.class);
 
     public QClient(String variable) {

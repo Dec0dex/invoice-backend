@@ -2,8 +2,10 @@ net/decodex/invoice/domain/model/QUnitOfMeasure.class
 net/decodex/invoice/domain/model/QUser.class
 net/decodex/invoice/domain/model/QProductPrice.class
 net/decodex/invoice/domain/model/QCompany.class
+net/decodex/invoice/domain/dao/UnitOfMeasureDao.class
 net/decodex/invoice/domain/dao/ProductPriceDao.class
 net/decodex/invoice/domain/dao/InvoiceDao.class
+net/decodex/invoice/domain/dao/ClientDao.class
 net/decodex/invoice/domain/dao/UserDao.class
 net/decodex/invoice/domain/model/QClient.class
 net/decodex/invoice/domain/model/QProduct.class

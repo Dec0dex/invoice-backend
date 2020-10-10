@@ -32,6 +32,8 @@ public class QProductPrice extends EntityPathBase<ProductPrice> {
 
     public final QInvoice invoice;
 
+    public final NumberPath<Integer> number = createNumber("number", Integer.class);
+
     public final NumberPath<Double> price = createNumber("price", Double.class);
 
     public final QProduct product;

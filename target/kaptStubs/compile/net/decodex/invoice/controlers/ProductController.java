@@ -2,7 +2,7 @@ package net.decodex.invoice.controlers;
 
 import java.lang.System;
 
-@kotlin.Metadata(mv = {1, 1, 16}, bv = {1, 0, 3}, k = 1, d1 = {"\u00008\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0010\u0002\n\u0000\n\u0002\u0010\t\n\u0002\b\u0002\n\u0002\u0010 \n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0002\b\u0017\u0018\u00002\u00020\u0001B\u0005\u00a2\u0006\u0002\u0010\u0002J\u0012\u0010\t\u001a\u00020\n2\b\b\u0001\u0010\u000b\u001a\u00020\nH\u0017J\u0012\u0010\f\u001a\u00020\r2\b\b\u0001\u0010\u000e\u001a\u00020\u000fH\u0017J\u0012\u0010\u0010\u001a\u00020\n2\b\b\u0001\u0010\u000e\u001a\u00020\u000fH\u0017J\u001a\u0010\u0011\u001a\b\u0012\u0004\u0012\u00020\n0\u00122\n\b\u0001\u0010\u0013\u001a\u0004\u0018\u00010\u0014H\u0017J\u0012\u0010\u0015\u001a\u00020\n2\b\b\u0001\u0010\u000b\u001a\u00020\nH\u0017R\u001e\u0010\u0003\u001a\u00020\u00048\u0016@\u0016X\u0097.\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0005\u0010\u0006\"\u0004\b\u0007\u0010\b\u00a8\u0006\u0016"}, d2 = {"Lnet/decodex/invoice/controlers/ProductController;", "", "()V", "productService", "Lnet/decodex/invoice/services/ProductService;", "getProductService", "()Lnet/decodex/invoice/services/ProductService;", "setProductService", "(Lnet/decodex/invoice/services/ProductService;)V", "createProduct", "Lnet/decodex/invoice/domain/dto/ProductDto;", "productDto", "deleteProductById", "", "id", "", "getProductById", "getProducts", "", "predicate", "Lcom/querydsl/core/types/Predicate;", "updateProduct", "invoice-backend"})
+@kotlin.Metadata(mv = {1, 1, 16}, bv = {1, 0, 3}, k = 1, d1 = {"\u0000@\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0010\u0002\n\u0000\n\u0002\u0010\t\n\u0002\b\u0002\n\u0002\u0010\u0006\n\u0002\b\u0002\n\u0002\u0010 \n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0002\b\u0017\u0018\u00002\u00020\u0001B\u0005\u00a2\u0006\u0002\u0010\u0002J\u0012\u0010\t\u001a\u00020\n2\b\b\u0001\u0010\u000b\u001a\u00020\nH\u0017J\u0012\u0010\f\u001a\u00020\r2\b\b\u0001\u0010\u000e\u001a\u00020\u000fH\u0017J\u0012\u0010\u0010\u001a\u00020\n2\b\b\u0001\u0010\u000e\u001a\u00020\u000fH\u0017J\u001c\u0010\u0011\u001a\u00020\u00122\b\b\u0001\u0010\u000e\u001a\u00020\u000f2\b\b\u0001\u0010\u0013\u001a\u00020\u000fH\u0017J\u001a\u0010\u0014\u001a\b\u0012\u0004\u0012\u00020\n0\u00152\n\b\u0001\u0010\u0016\u001a\u0004\u0018\u00010\u0017H\u0017J\u0012\u0010\u0018\u001a\u00020\n2\b\b\u0001\u0010\u000b\u001a\u00020\nH\u0017R\u001e\u0010\u0003\u001a\u00020\u00048\u0016@\u0016X\u0097.\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0005\u0010\u0006\"\u0004\b\u0007\u0010\b\u00a8\u0006\u0019"}, d2 = {"Lnet/decodex/invoice/controlers/ProductController;", "", "()V", "productService", "Lnet/decodex/invoice/services/ProductService;", "getProductService", "()Lnet/decodex/invoice/services/ProductService;", "setProductService", "(Lnet/decodex/invoice/services/ProductService;)V", "createProduct", "Lnet/decodex/invoice/domain/dto/ProductDto;", "productDto", "deleteProductById", "", "id", "", "getProductById", "getProductPriceForClient", "", "clientId", "getProducts", "", "predicate", "Lcom/querydsl/core/types/Predicate;", "updateProduct", "invoice-backend"})
 @org.springframework.web.bind.annotation.RequestMapping(value = {"/api/product"})
 @org.springframework.web.bind.annotation.RestController()
 public class ProductController {
@@ -53,6 +53,13 @@ public class ProductController {
     @org.springframework.web.bind.annotation.RequestBody()
     net.decodex.invoice.domain.dto.ProductDto productDto) {
         return null;
+    }
+    
+    @org.springframework.web.bind.annotation.GetMapping(value = {"/{id}/price/{clientId}"})
+    public double getProductPriceForClient(@org.springframework.web.bind.annotation.PathVariable()
+    long id, @org.springframework.web.bind.annotation.PathVariable()
+    long clientId) {
+        return 0.0;
     }
     
     public ProductController() {

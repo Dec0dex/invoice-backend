@@ -1,7 +1,6 @@
 package net.decodex.invoice.domain.dto
 
 import net.decodex.invoice.domain.model.UnitOfMeasure
-import net.decodex.invoice.domain.model.User
 import java.util.*
 
 class UnitOfMeasureDto() {
